@@ -55,10 +55,19 @@ exports.signUp = (req, res, status)=>{
                 role: req.body.role!==null?req.body.role:'Admin'
             });
 
-            user.save().then(result=>{
+            user.save().then(user=>{
+
+                const token = jwt.sign({
+                    _id: user._id,
+                    role: user.role,
+                }, 'thisIsSecretKey', {expiresIn: '2h'});
+
+                const {_id, firstName, lastName, email} = user;
+
                 return res.status(200).json({
                     message: "sign up success",
-                    user: result
+                    user: {_id, firstName, lastName, email},
+                    token
                 });
             })
         }

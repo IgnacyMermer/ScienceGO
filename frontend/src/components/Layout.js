@@ -11,6 +11,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -81,6 +82,11 @@ export default function Layout(props) {
                             <ListItemText primary={text} />
                         </ListItem>
                     ))}
+                    <Link to='/zaloguj_sie'>
+                        <ListItem>
+                            Zaloguj się
+                        </ListItem>
+                    </Link>
                 </List>
             </Drawer>
             <main style={{paddingTop: '64px', marginLeft: open ? '240px': '0', backgroundColor: '#8469bf', 
