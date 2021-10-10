@@ -75,3 +75,34 @@ export const signout=()=>{
         }
     }
 }
+
+export const signUp=(user)=>{
+    return async dispatch=>{
+        dispatch({type: signingConstants.SIGN_UP_REQUEST})
+
+        const res = await axiosInstance.post('/signup', {
+            ...user
+        });
+
+        if(res.status===200){
+
+            const {token, user} = res.data;
+            localStorage.setItem('token', token);
+            localStorage.setItem('user', JSON.stringify(user));
+            dispatch({
+                type: signingConstants.SIGN_UP_SUCCESS,
+                payload: {
+                    token, user
+                }
+            })
+        }
+        else{
+            if(res.status===500){
+                dispatch({
+                    type: signingConstants.SIGN_UP_FAILURE,
+                    payload: {error: res.data.error}
+                })
+            }
+        }
+    }
+}

@@ -4,14 +4,16 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { signIn } from '../../store/actions/signingActions';
+import { signUp } from '../../store/actions/signingActions';
 
-export default function SignIn() {
+export default function SignUp() {
 
     const history = useHistory();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const dispatch = useDispatch();
     const signing = useSelector(state=>state.signing);
 
@@ -19,7 +21,7 @@ export default function SignIn() {
         if(e!=undefined){
             e.preventDefault();
         }
-        dispatch(signIn({email, password}));
+        dispatch(signUp({firstName, lastName, email, password}));
     }
     
     useEffect(()=>{
@@ -32,6 +34,30 @@ export default function SignIn() {
         <Layout>
             <form className="white" onSubmit={handleSubmit}>
                 <h2 className="grey-text text-darken-3">Zaloguj się</h2>
+                <p>
+                    <TextField
+                        id="outlined-name-input"
+                        label="Imię"
+                        type="name"
+                        variant="outlined"
+                        value={firstName}
+                        onChange={(value) => {
+                            setFirstName(value.target.value);
+                        }}
+                    />
+                </p>
+                <p>
+                    <TextField
+                        id="outlined-name-input"
+                        label="Nazwisko"
+                        type="name"
+                        variant="outlined"
+                        value={lastName}
+                        onChange={(value) => {
+                            setLastName(value.target.value);
+                        }}
+                    />
+                </p>
                 <p>
                     <TextField
                         id="outlined-email-input"
