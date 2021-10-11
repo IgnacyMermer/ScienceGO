@@ -5,6 +5,7 @@ require('dotenv').config()
 const app = express();
 const cors = require('cors');
 const authRoutes = require('./routes/Auth');
+const chatRoutes = require('./routes/Chat');
 
 app.get('/', (req, res, status)=>{
     return res.status(200).json({
@@ -27,6 +28,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/', authRoutes);
+app.use('/', chatRoutes);
 
 
 app.listen(2000, ()=>{
