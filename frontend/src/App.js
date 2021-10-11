@@ -28,7 +28,7 @@ function App() {
             <Route path='/' exact component={MainPage} />
             <Route path='/zaloguj_sie' exact component={SignIn} />
             <Route path='/zarejestruj_sie' exact component={SignUp} />
-            <Route path='chat' exact component={ChatPage} />
+            <Route path='/chat' exact component={ChatPage} />
           </Switch>
         </Router>
     </div>
