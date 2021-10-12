@@ -38,13 +38,13 @@ export default function Layout(props) {
             <AppBar
                 position="fixed"
             >
-                <Toolbar style={{marginLeft: !open ? '0px':'240px', transition: '0.22s'}}>
+                <Toolbar style={{ marginLeft: !open ? '0px' : '240px', transition: '0.22s' }}>
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"
                         onClick={handleDrawerOpen}
                         edge="start"
-                        style={{display: !open?'flex': 'none'}}
+                        style={{ display: !open ? 'flex' : 'none' }}
                     >
                         <MenuIcon />
                     </IconButton>
@@ -57,7 +57,7 @@ export default function Layout(props) {
                 variant="persistent"
                 anchor="left"
                 open={open}
-                style={{width: '240px'}}
+                style={{ width: '240px' }}
                 classes={{
                     paper: classes.drawerPaper,
                 }}
@@ -69,16 +69,14 @@ export default function Layout(props) {
                 </div>
                 <Divider />
                 <List>
-                    {['Strona główna', 'Forum', 'Kalkulatory', 'Teoria'].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemText primary={text} />
-                        </ListItem>
+                    {[{ title: 'Strona główna', link: '../' }, { title: 'Czat', link: '../chat' }, { title: 'Forum', link: '../forum' },
+                    { title: 'Kalkulatory', link: '../kalkulatory' }, { title: 'Teoria', link: '../teoria' },].map((item, index) => (
+                        <Link to={item.link}>
+                            <ListItem button key={item.title}>
+                                <ListItemText primary={item.title} />
+                            </ListItem>
+                        </Link>
                     ))}
-                    <Link to='/chat'>
-                        <ListItem>
-                            Czat
-                        </ListItem>
-                    </Link>
                 </List>
                 <Divider />
                 <List>
@@ -94,8 +92,10 @@ export default function Layout(props) {
                     </Link>
                 </List>
             </Drawer>
-            <main style={{paddingTop: '64px', marginLeft: open ? '240px': '0', backgroundColor: '#8469bf', 
-            minHeight: '100vh', transition: '0.22s'}}>
+            <main style={{
+                paddingTop: '64px', marginLeft: open ? '240px' : '0', backgroundColor: '#8469bf',
+                minHeight: '100vh', transition: '0.22s'
+            }}>
                 {props.children}
             </main>
         </div>
