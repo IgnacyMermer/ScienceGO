@@ -69,11 +69,16 @@ export default function Layout(props) {
                 </div>
                 <Divider />
                 <List>
-                    {['Strona główna', 'Czat', 'Forum', 'Kalkulatory', 'Teoria'].map((text, index) => (
+                    {['Strona główna', 'Forum', 'Kalkulatory', 'Teoria'].map((text, index) => (
                         <ListItem button key={text}>
                             <ListItemText primary={text} />
                         </ListItem>
                     ))}
+                    <Link to='/chat'>
+                        <ListItem>
+                            Czat
+                        </ListItem>
+                    </Link>
                 </List>
                 <Divider />
                 <List>

@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getMessages, sendMessage } from '../../store/actions/chatActions';
 import './Chat.css';
 import TextField from '@material-ui/core/TextField';
+import { Button } from '@material-ui/core';
 
 
 export default function ChatPage() {
@@ -28,29 +29,8 @@ export default function ChatPage() {
 
     return (
         <Layout>
-            <button
-                onClick={() => {
-                    dispatch(
-                        sendMessage({
-                            text: yourMessage,
-                            author: { id: signing.user._id },
-                            date: new Date(Date.now()).toISOString()
-                        })
-                    );
-                    setYourMessage('');
-                }
-                }
-            >
-                Send message from me
-            </button>
-            <button onClick={() => {
-                dispatch(sendMessage({ text: "message", author: { id: "61111b0b86b9d001482a6943", nick: "Paweł" }, date: Date.now() }));
-                setYourMessage('');
-            }}>
-                Send message from another user
-            </button>
-
-            <div >
+            
+            <div style={{paddingTop: '20px'}}>
                 <div className='chatContainer'>
                     {
                         chat&&chat.messages && chat.messages.map(m => {
@@ -70,6 +50,20 @@ export default function ChatPage() {
                         
                         <TextField id="standard-basic" label="Twoja wiadomość" value={yourMessage} ref={ref}
                             onChange={(value) => setYourMessage(value.target.value)}/>
+                        <Button style={{marginTop: '10px'}} onClick={()=>{
+                            if(yourMessage!==''){
+                                dispatch(
+                                    sendMessage({
+                                        text: yourMessage,
+                                        user: signing.user._id,
+                                        date: new Date(Date.now()).toISOString()
+                                    })
+                                );
+                                setYourMessage('');
+                            }
+                        }} >
+                            Wyślij
+                        </Button>
                     </p>}
                 </div>
             </div>
