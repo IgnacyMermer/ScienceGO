@@ -1,4 +1,5 @@
 const Post = require('../models/Post');
+const Answer = require('../models/PostAnswer');
 
 exports.addPost = (req, res, status) => {
     const post = new Post({
@@ -35,10 +36,11 @@ exports.getConcretePost = (req, res, status) => {
         return res.status(200).json({
             post
         })
-        .catch(error=>{
-            return res.status(400).json({
-                error
-            })
+    })
+    .catch(error=>{
+        console.log(error);
+        return res.status(400).json({
+            error
         })
     })
 }
