@@ -50,6 +50,25 @@ const postsReducer = (state=initialState, action)=>{
             }
             break;
         }
+        case forumConstants.POST_ANSWER_ADD_SUCCESS:{
+            let index = -1;
+            for(let i=0; i<state.posts.length; i++){
+                if(state.posts[i]._id == action.payload.post._id){
+                    index = i;
+                    break;
+                }
+            }
+            if(index!=-1){
+                state.posts.splice(index, 1);
+            }
+            state={
+                ...state,
+                posts: [...state.posts, action.payload.post],
+                loading: false,
+                error: null
+            }
+            break;
+        }
     }
     return state;
 }

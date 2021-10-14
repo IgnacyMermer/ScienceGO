@@ -32,15 +32,49 @@ exports.getPosts = (req, res, status) => {
 }
 
 exports.getConcretePost = (req, res, status) => {
-    Post.find({_id: req.body._id}).populate('answers').exec().then(post=>{
+    Post.findOne({_id: req.body._id}).populate([{path: 'answers', populate:{path: 'user'}}, {path: 'user'}]).exec().then(post=>{
         return res.status(200).json({
             post
         })
     })
     .catch(error=>{
-        console.log(error);
         return res.status(400).json({
             error
+        })
+    })
+}
+
+exports.addAnswer = (req, res, status) => {
+    const answer = new Answer({
+        content: req.body.content,
+        user: req.body.user,
+        post: req.body.post
+    });
+
+    answer.save().then(result=>{
+        Post.findOneAndUpdate(
+            {_id: req.body.post}, 
+            {
+                "$push": {
+                    "answers": result._id
+                }
+            }, 
+            {new: true, upsert: true}
+        )
+        .exec()
+        .then(post=>{
+            return res.status(200).json({
+                answer: result,
+                post: post
+            }).catch(error=>{
+                return res.status(400).json({
+                    error
+                })
+            })
+        })
+    }).catch(error=>{
+        res.status(400).json({
+            error: error
         })
     })
 }

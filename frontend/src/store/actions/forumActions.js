@@ -57,3 +57,34 @@ export const addPost=(title, content, user)=>{
         }
     }
 }
+
+export const addAnswerToPost = (content, user, post)=>{
+    return async dispatch=>{
+        try{
+
+            const res = await axiosInstance.post('/answerpost', {
+                content, 
+                user, 
+                post
+            });
+
+            dispatch({type: forumConstants.POST_ANSWER_ADD_REQUEST});
+
+            if(res.status==200){
+                dispatch({
+                    type: forumConstants.POST_ANSWER_ADD_SUCCESS,
+                    payload: res.data
+                });
+            }
+            else{
+                dispatch({
+                    type: forumConstants.POST_ANSWER_ADD_FAILURE,
+                    payload: res.data.error
+                });
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+}
