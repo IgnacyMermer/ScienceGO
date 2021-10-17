@@ -20,6 +20,9 @@ exports.addPost = (req, res, status) => {
 }
 
 exports.getPosts = (req, res, status) => {
+
+    console.log(req.headers);
+
     Post.find({}).select('user title content category answers images _id').populate('user', 'firstName username').exec().then(posts => {
         return res.status(200).json({
             posts

@@ -4,6 +4,7 @@ import logger from 'redux-logger';
 import signing from './reducers/signingReducer';
 import chat from './reducers/chatReducer';
 import forum from './reducers/forumReducer';
+import {composeWithDevTools} from 'redux-devtools-extension';
 
 export default createStore(
     combineReducers({
@@ -12,5 +13,7 @@ export default createStore(
         forum
     }),
     {},
-    applyMiddleware(logger, thunk)
+    composeWithDevTools(
+        applyMiddleware(logger, thunk)
+    )
 )

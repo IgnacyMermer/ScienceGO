@@ -64,12 +64,14 @@ exports.signUp = (req, res, status)=>{
 
                 const {_id, firstName, lastName, email} = user;
 
+                res.cookie('token', token, {expiresIn: '1d'});
+
                 return res.status(200).json({
                     message: "sign up success",
                     user: {_id, firstName, lastName, email},
                     token
                 });
-            })
+            });
         }
     }).catch(err=>{
         res.status(400).json({

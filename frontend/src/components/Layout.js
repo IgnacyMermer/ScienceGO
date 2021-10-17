@@ -12,7 +12,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { signout } from '../store/actions/signingActions';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -26,6 +27,7 @@ export default function Layout(props) {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
     const signing = useSelector(state => state.signing);
+    const dispatch = useDispatch();
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -87,7 +89,7 @@ export default function Layout(props) {
                             <ListItemText primary={text} />
                         </ListItem>
                     ))}
-                    {signing.user ?
+                    {signing.authenticate ?
                         <Link to='/twoje_konto'>
                             <ListItem>
                                 Twoje konto
@@ -102,7 +104,7 @@ export default function Layout(props) {
                     {
                         signing.authenticate&&
                         <ListItem button onClick={()=>{
-                            console.log('Wyloguj')
+                            dispatch(signout());
                         }}>
                             <ListItemText primary={'Wyloguj się'} />
                         </ListItem>
