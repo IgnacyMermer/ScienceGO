@@ -45,6 +45,7 @@ exports.getConcretePost = (req, res, status) => {
 }
 
 exports.addAnswer = (req, res, status) => {
+    
     const answer = new Answer({
         content: req.body.content,
         user: req.body.user,
@@ -66,11 +67,7 @@ exports.addAnswer = (req, res, status) => {
             return res.status(200).json({
                 answer: result,
                 post: post
-            }).catch(error=>{
-                return res.status(400).json({
-                    error
-                })
-            })
+            });
         })
     }).catch(error=>{
         res.status(400).json({

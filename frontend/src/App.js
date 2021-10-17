@@ -10,6 +10,7 @@ import SignUp from './pages/signing/SignUp';
 import ForumPage from './pages/forum/ForumPage';
 import AddPost from './pages/forum/AddPost';
 import PostDetailsPage from './pages/forum/PostDetailsPage';
+import YourAccount from './pages/signing/YourAccount';
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
             <Route path='/forum' exact component={ForumPage} />
             <Route path='/forum/dodaj_post' exact component={AddPost} />
             <Route path='/forum/:id' exact component={PostDetailsPage} />
+            <Route path='/twoje_konto' exact component={YourAccount} />
           </Switch>
         </Router>
     </div>

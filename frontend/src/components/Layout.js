@@ -12,6 +12,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -24,6 +25,7 @@ export default function Layout(props) {
 
     const classes = useStyles();
     const [open, setOpen] = useState(false);
+    const signing = useSelector(state => state.signing);
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -85,11 +87,26 @@ export default function Layout(props) {
                             <ListItemText primary={text} />
                         </ListItem>
                     ))}
-                    <Link to='/zaloguj_sie'>
-                        <ListItem>
-                            Zaloguj się
+                    {signing.user ?
+                        <Link to='/twoje_konto'>
+                            <ListItem>
+                                Twoje konto
+                            </ListItem>
+                        </Link> :
+                        <Link to='/zaloguj_sie'>
+                            <ListItem>
+                                Zaloguj się
+                            </ListItem>
+                        </Link>
+                    }
+                    {
+                        signing.authenticate&&
+                        <ListItem button onClick={()=>{
+                            console.log('Wyloguj')
+                        }}>
+                            <ListItemText primary={'Wyloguj się'} />
                         </ListItem>
-                    </Link>
+                    }
                 </List>
             </Drawer>
             <main style={{
