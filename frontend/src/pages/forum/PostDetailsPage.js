@@ -56,7 +56,7 @@ export default function PostDetailsPage() {
     const [open, setOpen] = useState(false);
 
     return (
-        <Layout>
+        <div>
             <div>
                 <div style={{ background: '#b8b3a5', padding: '50px 30px 50px 30px ', textAlign: 'center', borderRadius: '20px', marginTop: '30px' }}>
                     <h2 style={{ marginBottom: '60px', fontWeight: 'bold' }}>
@@ -134,6 +134,6 @@ export default function PostDetailsPage() {
                 </Snackbar>
             </Dialog>
 
-        </Layout>
+        </div>
     )
 }

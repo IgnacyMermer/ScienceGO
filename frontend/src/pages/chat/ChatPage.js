@@ -28,7 +28,7 @@ export default function ChatPage() {
     }, [chat.messages]);
 
     return (
-        <Layout>
+        <div>
             
             <div style={{paddingTop: '20px'}}>
                 <div className='chatContainer'>
@@ -67,6 +67,6 @@ export default function ChatPage() {
                     </p>}
                 </div>
             </div>
-        </Layout>
+        </div>
     )
 }

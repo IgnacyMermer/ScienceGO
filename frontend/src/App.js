@@ -11,6 +11,7 @@ import ForumPage from './pages/forum/ForumPage';
 import AddPost from './pages/forum/AddPost';
 import PostDetailsPage from './pages/forum/PostDetailsPage';
 import YourAccount from './pages/signing/YourAccount';
+import Layout from './components/Layout';
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
   return (
     <div className="App">
         <Router>
+          <Layout>
           <Switch>
             <Route path='/' exact component={MainPage} />
             <Route path='/zaloguj_sie' exact component={SignIn} />
@@ -38,6 +40,7 @@ function App() {
             <Route path='/forum/:id' exact component={PostDetailsPage} />
             <Route path='/twoje_konto' exact component={YourAccount} />
           </Switch>
+          </Layout>
         </Router>
     </div>
   );

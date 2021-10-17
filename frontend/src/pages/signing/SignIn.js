@@ -24,12 +24,12 @@ export default function SignIn() {
     
     useEffect(()=>{
         if(signing.authenticate){
-            history.push('/');
+            history.goBack();
         }
     }, [signing.authenticate])
 
     return (
-        <Layout>
+        <div>
             <form className="white" onSubmit={handleSubmit}>
                 <h2 className="grey-text text-darken-3">Zaloguj się</h2>
                 <p>
@@ -71,6 +71,6 @@ export default function SignIn() {
                     </Link>
                 </div>
             </form>
-        </Layout>
+        </div>
     )
 }

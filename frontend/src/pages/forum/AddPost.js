@@ -21,7 +21,7 @@ export default function AddPost() {
     }
 
     return (
-        <Layout>
+        <div>
             <p>Dodaj post</p>
             <p>
                 <TextField
@@ -51,6 +51,6 @@ export default function AddPost() {
             }}>
                 Zatwierdź
             </Button>
-        </Layout>
+        </div>
     )
 }

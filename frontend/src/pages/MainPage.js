@@ -7,8 +7,8 @@ export default function MainPage() {
     const signing = useSelector(state=>state.signing);
 
     return (
-        <Layout>
+        <div>
             Strona główna
-        </Layout>
+        </div>
     )
 }
