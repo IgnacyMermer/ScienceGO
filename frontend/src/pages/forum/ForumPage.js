@@ -62,29 +62,14 @@ export default function ForumPage() {
                 {
                     posts && posts.map(post => {
                         return (
-                            <Link to={'/forum/' + post._id} style={{ textDecoration: 'none', color: 'black' }}>
-                                <div style={{ width: 'fit-content', marginBottom: '30px', padding: '0 10px 0 10px', border: '2px solid black' }}>
-                                    <p>
-                                        {
-                                            post.title
-                                        }
-                                    </p>
-                                    <p>
-                                        {
-                                            post.content
-                                        }
-                                    </p>
-                                    <p>
-                                        {
-                                            post.user.username
-                                        }
-                                    </p>
-                                    <p>
-                                        {
-                                            post.category
-                                        }
-                                    </p>
+                            <Link to={'/forum/' + post._id} style={{ width: '25%', textDecoration: 'none', color: 'black' }}>
+                                <div style={{ width: 'calc(100%-24px)', marginBottom: '30px', padding: '0 10px 0 10px', 
+                                border: '2px solid black' }}>
+                                    <h2>{post.title}</h2>
+                                    <p>{post.content}</p>
+                                    <h5>Kategoria: {post.category}</h5>
                                     <p>Odpowiedzi: {post.answers.length}</p>
+                                    <p style={{display: 'ruby'}}>Użytkownik: <h4>{post.user.firstName + ' ' + post.user.lastName}</h4></p>
                                 </div>
                             </Link>
                         );

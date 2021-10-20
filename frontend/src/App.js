@@ -1,6 +1,6 @@
 import './App.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, useLocation } from 'react-router-dom';
 import MainPage from './pages/MainPage';
 import SignIn from './pages/signing/SignIn';
 import React, { useEffect } from 'react';
@@ -12,24 +12,36 @@ import AddPost from './pages/forum/AddPost';
 import PostDetailsPage from './pages/forum/PostDetailsPage';
 import YourAccount from './pages/signing/YourAccount';
 import Layout from './components/Layout';
+import VideoPlayer from './components/VideoPlayer';
+
 
 function App() {
 
   const dispatch = useDispatch();
-  const signing = useSelector(state=>state.signing);
+  const signing = useSelector(state => state.signing);
+  const location = useLocation();
+  
 
-  useEffect(()=>{
-    
-    if(!signing.authenticate){
-        dispatch(isUserLoggedIn());
+  useEffect(() => {
+
+    if (!signing.authenticate) {
+      dispatch(isUserLoggedIn());
     }
-    
+
   }, [signing.authenticate])
+
+  useEffect(() => {
+    if (window.location.href.split('/')[3] !== 'rozmowa') {
+      window.localStream && window.localStream.getTracks().forEach(function (track) {
+        track.stop();
+      });
+    }
+  }, [location]);
 
   return (
     <div className="App">
-        <Router>
-          <Layout>
+      
+        <Layout>
           <Switch>
             <Route path='/' exact component={MainPage} />
             <Route path='/zaloguj_sie' exact component={SignIn} />
@@ -39,9 +51,9 @@ function App() {
             <Route path='/forum/dodaj_post' exact component={AddPost} />
             <Route path='/forum/:id' exact component={PostDetailsPage} />
             <Route path='/twoje_konto' exact component={YourAccount} />
+            <Route path='/rozmowa' exact component={VideoPlayer} />
           </Switch>
-          </Layout>
-        </Router>
+        </Layout>
     </div>
   );
 }

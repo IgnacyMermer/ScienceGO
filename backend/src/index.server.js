@@ -1,9 +1,17 @@
 const express = require('express');
 const mongoose = require('mongoose');
-require('dotenv').config()
+require('dotenv').config();
 
 const app = express();
 const cors = require('cors');
+const server = require('http').createServer(app);
+const io = require('socket.io')(server, {
+    cors: {
+        origin: '*',
+        methods: ['GET', 'POST'],
+    }
+});
+
 const authRoutes = require('./routes/Auth');
 const chatRoutes = require('./routes/Chat');
 const forumRoutes = require('./routes/Forum');
@@ -32,6 +40,22 @@ app.use('/', authRoutes);
 app.use('/', chatRoutes);
 app.use('/', forumRoutes);
 
-app.listen(2000, ()=>{
-    console.log('server is running well!!!');
+io.on('connection', (socket)=>{
+    socket.emit('me', socket.id);
+
+    socket.on('disconnect', ()=>{
+        socket.broadcast.emit('callended');
+    });
+
+    socket.on('calluser', ({userToCall, signalData, from, name})=>{
+        io.to(userToCall).emit('calluser', {signal: signalData, from, name});
+    });
+
+    socket.on('answercall', (data)=>{
+        io.to(data.to).emit('callaccepted', data.signal);
+    });
+})
+
+server.listen(2000, ()=>{
+    console.log('server is running well!');
 });

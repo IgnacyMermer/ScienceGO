@@ -75,7 +75,7 @@ export default function Layout(props) {
                 <List>
                     {[{ title: 'Strona główna', link: '../' }, { title: 'Czat', link: '../chat' }, { title: 'Forum', link: '../forum' },
                     { title: 'Kalkulatory', link: '../kalkulatory' }, { title: 'Teoria', link: '../teoria' },].map((item, index) => (
-                        <Link to={item.link}>
+                        <Link style={{color: 'black', textDecoration: 'none'}} to={item.link}>
                             <ListItem button key={item.title}>
                                 <ListItemText primary={item.title} />
                             </ListItem>
@@ -84,26 +84,37 @@ export default function Layout(props) {
                 </List>
                 <Divider />
                 <List>
-                    {['Ustawienia', 'Twoje konto'].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemText primary={text} />
-                        </ListItem>
-                    ))}
+                    {
+                        signing.authenticate &&
+                        <Link style={{color: 'black', textDecoration: 'none'}} to='../rozmowa'>
+                            <ListItem button>
+                                <ListItemText primary={'Rozmowa Video'} />
+                            </ListItem>
+                        </Link>
+                    }
+                    {
+                        signing.authenticate &&
+                        <Link style={{color: 'black', textDecoration: 'none'}} to='../ustawienia'>
+                            <ListItem button>
+                                <ListItemText primary={'Ustawienia'} />
+                            </ListItem>
+                        </Link>
+                    }
                     {signing.authenticate ?
-                        <Link to='/twoje_konto'>
-                            <ListItem>
+                        <Link style={{color: 'black', textDecoration: 'none'}} to='/twoje_konto'>
+                            <ListItem button>
                                 Twoje konto
                             </ListItem>
                         </Link> :
-                        <Link to='/zaloguj_sie'>
-                            <ListItem>
+                        <Link style={{color: 'black', textDecoration: 'none'}} to='/zaloguj_sie'>
+                            <ListItem button>
                                 Zaloguj się
                             </ListItem>
                         </Link>
                     }
                     {
-                        signing.authenticate&&
-                        <ListItem button onClick={()=>{
+                        signing.authenticate &&
+                        <ListItem button onClick={() => {
                             dispatch(signout());
                         }}>
                             <ListItemText primary={'Wyloguj się'} />
