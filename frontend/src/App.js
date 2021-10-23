@@ -13,6 +13,9 @@ import PostDetailsPage from './pages/forum/PostDetailsPage';
 import YourAccount from './pages/signing/YourAccount';
 import Layout from './components/Layout';
 import VideoPlayer from './components/VideoPlayer';
+import Kwadrat from './calculators/Kwadrat';
+import Prostokat from './calculators/Prostokat';
+import Romb from './calculators/Romb';
 
 
 function App() {
@@ -52,6 +55,9 @@ function App() {
             <Route path='/forum/:id' exact component={PostDetailsPage} />
             <Route path='/twoje_konto' exact component={YourAccount} />
             <Route path='/rozmowa' exact component={VideoPlayer} />
+            <Route path='/kwadrat' exact component={Kwadrat}/>
+            <Route path='/prostokat' exact component={Prostokat}/>
+            <Route path='/romb' exact component={Romb} />
           </Switch>
         </Layout>
     </div>
