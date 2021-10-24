@@ -16,6 +16,9 @@ import VideoPlayer from './components/VideoPlayer';
 import Kwadrat from './calculators/Kwadrat';
 import Prostokat from './calculators/Prostokat';
 import Romb from './calculators/Romb';
+import Rownoleglobok from './calculators/Rownoleglobok';
+import Calculators from './calculators/Calculators';
+import Hydrostatyka from './calculators/Hydrostatyka';
 
 
 function App() {
@@ -55,9 +58,12 @@ function App() {
             <Route path='/forum/:id' exact component={PostDetailsPage} />
             <Route path='/twoje_konto' exact component={YourAccount} />
             <Route path='/rozmowa' exact component={VideoPlayer} />
+            <Route path='/kalkulatory' exact component={Calculators}/>
             <Route path='/kwadrat' exact component={Kwadrat}/>
             <Route path='/prostokat' exact component={Prostokat}/>
             <Route path='/romb' exact component={Romb} />
+            <Route path='/rownoleglobok' exact component={Rownoleglobok} />
+            <Route path='/cisnienieHydro' exact component={Hydrostatyka} />
           </Switch>
         </Layout>
     </div>
